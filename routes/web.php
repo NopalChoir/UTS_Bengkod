@@ -3,7 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PoliController;
 use App\Http\Controllers\DokterController;
-use App\Http\Controllers\PasienController;
+use App\Http\Controllers\Admin\PasienController;
 use App\Http\Controllers\ObatController;
 use Illuminate\Support\Facades\Route;
 

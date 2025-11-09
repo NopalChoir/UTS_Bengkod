@@ -34,25 +34,31 @@
 
                 {{-- Menu Dokter --}}
                 @if (Auth::user()->role == 'dokter')
-                    <li class="nav-header">DOKTER MENU</li>
                     <li class="nav-item">
-                        <a href="{{ route('dokter.dashboard') }}" class="nav-link">
+                        <a href="{{ route('dokter.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-user-md"></i>
-                            <p>Dashboard Dokter</p>
+                            <p>Manajemen Dokter</p>
                         </a>
                     </li>
                 @endif
 
                 {{-- Menu Pasien --}}
-                @if (Auth::user()->role == 'pasien')
-                    <li class="nav-header">PASIEN MENU</li>
                     <li class="nav-item">
-                        <a href="{{ route('pasien.dashboard') }}" class="nav-link">
+                        <a href="{{ route('pasien.index') }}"
+                        class="nav-link {{ request()->routeIs('pasien.*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-procedures"></i>
-                            <p>Dashboard Pasien</p>
+                            <p>Manajemen Pasien</p>
                         </a>
                     </li>
-                @endif
+
+                {{-- Menu Obat --}}
+                    <li class="nav-item">
+                        <a href="{{ route('obat.index') }}"
+                        class="nav-link {{ request()->routeIs('obat.*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-pills"></i>
+                            <p>Manajemen Obat</p>
+                        </a>
+                    </li>
 
                 {{-- Tombol Logout --}}
                 <li class="nav-item">
