@@ -29,8 +29,31 @@
                             </tr>
                         </thead>
                         <tbody>
-
-
+                            @forelse ($obats as $item)
+                                <tr>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->nama_obat }}</td>
+                                    <td>{{ $item->kemasan }}</td>
+                                    <td>{{ number_format($item->harga, 0, ',', '.') }}</td>
+                                    <td>
+                                        <a href="{{ route('obat.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <form action="{{ route('obat.destroy', $item->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                                <i class="fas fa-trash"></i> Hapus
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center">Belum ada data obat.</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

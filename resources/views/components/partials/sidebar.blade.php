@@ -33,25 +33,41 @@
                 @endif
 
                 {{-- Menu Dokter --}}
-                @if (Auth::user()->role == 'dokter')
+                @if (Auth::user()->role == 'dokter' || Auth::user()->role == 'admin')
                     <li class="nav-item">
                         <a href="{{ route('dokter.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-user-md"></i>
                             <p>Manajemen Dokter</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('jadwal.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-calendar-alt"></i>
+                            <p>Jadwal Periksa</p>
+                        </a>
+                    </li>
                 @endif
 
                 {{-- Menu Pasien --}}
+                @if (Auth::user()->role == 'pasien' || Auth::user()->role == 'admin')
                     <li class="nav-item">
-                        <a href="{{ route('pasien.index') }}"
-                        class="nav-link {{ request()->routeIs('pasien.*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-procedures"></i>
-                            <p>Manajemen Pasien</p>
+                        <a href="{{ route('pasien.dashboard') }}"
+                        class="nav-link {{ request()->routeIs('pasien.dashboard') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-columns"></i>
+                            <p>Dashboard Pasien</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('pasien.daftar.index') }}"
+                        class="nav-link {{ request()->routeIs('pasien.daftar') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-hospital-user"></i>
+                            <p>Poli Pasien</p>
+                        </a>
+                    </li>
+                @endif
 
                 {{-- Menu Obat --}}
+                @if (Auth::user()->role == 'admin')
                     <li class="nav-item">
                         <a href="{{ route('obat.index') }}"
                         class="nav-link {{ request()->routeIs('obat.*') ? 'active' : '' }}">
@@ -59,6 +75,7 @@
                             <p>Manajemen Obat</p>
                         </a>
                     </li>
+                @endif
 
                 {{-- Tombol Logout --}}
                 <li class="nav-item">
