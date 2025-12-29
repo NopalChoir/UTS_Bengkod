@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\PasienController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\JadwalPeriksaController;
 use App\Http\Controllers\Pasien\PoliController as PasienPoliController;
+use App\Http\Controllers\dokter\PeriksaPasienController;
+use App\Http\Controllers\dokter\RiwayatPasienController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -38,14 +40,28 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function() {
     Route::resource('pasien', PasienController::class);
     Route::resource('obat', ObatController::class);
     Route::resource('jadwal-periksa', JadwalPeriksaController::class);
+    Route::resource('periksa-pasien', PeriksaPasienController::class);
 });
 
 Route::middleware(['auth', 'role:admin|dokter'])->prefix('dokter')->group(function() {
     Route::get('/dashboard', [DokterController::class, 'index'])->name('dokter.dashboard');
     Route::get('/jadwal', [JadwalPeriksaController::class, 'index'])->name('jadwal.index');
-    // Tambahkan resource di sini agar dokter juga bisa CRUD
     Route::resource('dokter', DokterController::class);
     Route::resource('jadwal-periksa', JadwalPeriksaController::class);
+    Route::get('/periksa-pasien', [PeriksaPasienController::class, 'index'])
+        ->name('dokter.periksa-pasien.index');
+
+    Route::get('/periksa-pasien/{id}', [PeriksaPasienController::class, 'create'])
+        ->name('dokter.periksa-pasien.create');
+
+    Route::post('/periksa-pasien', [PeriksaPasienController::class, 'store'])
+        ->name('dokter.periksa-pasien.store');
+
+    Route::get('/riwayat-pasien', [RiwayatPasienController::class, 'index'])
+        ->name('dokter.riwayat-pasien.index');
+
+    Route::get('/riwayat-pasien/{id}', [RiwayatPasienController::class, 'show'])
+        ->name('dokter.riwayat-pasien.show');
 });
 
 Route::middleware(['auth', 'role:admin|pasien'])->prefix('pasien')->group(function(){

@@ -45,6 +45,19 @@
                             <i class="nav-icon fas fa-calendar-alt"></i>
                             <p>Jadwal Periksa</p>
                         </a>
+                    <li class="nav-item">
+                        <a href="{{ route('dokter.periksa-pasien.index') }}"
+                        class="nav-link {{ request()->routeIs('dokter.periksa-pasien*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-stethoscope"></i>
+                            <p>Periksa Pasien</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('riwayat-pasien.index') }}"
+                        class="nav-link {{ request()->routeIs('riwayat-pasien[].*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-history"></i>
+                            <p>Periksa Pasien</p>
+                        </a>
                     </li>
                 @endif
 

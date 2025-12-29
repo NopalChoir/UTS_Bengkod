@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class DaftarPoli extends Model
 {
+    use HasFactory;
+
     protected $table = 'daftar_poli';
 
     protected $fillable = [
@@ -15,15 +18,18 @@ class DaftarPoli extends Model
         'no_antrian'
     ];
 
-    public function pasien(){
-        return $this->belongsTo(User::class, 'id_pasien');
+    public function pasien()
+    {
+        return $this->belongsTo(Pasien::class, 'id_pasien');
     }
 
-    public function jadwal_periksa(){
+    public function jadwalPeriksa()
+    {
         return $this->belongsTo(JadwalPeriksa::class, 'id_jadwal');
     }
 
-    public function periksa(){
+    public function periksas()
+    {
         return $this->hasMany(Periksa::class, 'id_daftar_poli');
     }
 }
